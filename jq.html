@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script>
+       function getValue() {
+
+        /*
+          jQuery deferreds are similar to promises,
+          but not the same thing
+        */
+
+        var dfd = $.get('/value');
+        console.log(dfd);
+
+        dfd.then(function(data){
+          
+          return 3 * +data;
+        }).then(function(data){
+          console.log(data);
+        });
+        dfd.error(function(err){
+          console.log('Oh')
+        });
+        dfd.always(function(data){
+          console.log("I'll always happen")
+        });
+       }
+
+
+    </script>
+  </head>
+  <body>
+    <button onclick="getValue()">click me</button>
+  </body>
+</html>

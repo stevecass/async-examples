@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <script>
+        function get(url) {
+      // Return a new promise.
+      return new Promise(function(resolve, reject) {
+
+        var req = new XMLHttpRequest();
+        req.open('GET', url);
+
+        req.onload = function() {
+          if (req.status == 200) {
+            // Resolve the promise with the response text
+            resolve(req.response);
+          }
+          else {
+            reject(Error(req.statusText));
+          }
+        };
+        req.onerror = function() {
+          reject(Error("Network Error"));
+        };
+
+        // Make the request
+        req.send();
+      });
+    }
+
+    function getValue() {
+      var promise = get('/value');
+      
+      promise.then(function(response) {
+        //throw "Unexpected condition";
+          return 3 * +response;
+      })
+      .then(function(data) {
+        var result = 4 * data;
+        console.log('I was passed ' + data + ' and will alert ' + result);
+         return result;
+      })
+      .then(function(data){
+        var result = 'abc' + data;
+        console.log('reso', result);
+        return result;
+      })
+      .catch(function(error) {
+        console.log(error);
+        alert('There was an error: ' + error);
+      });
+
+      promise.then(function(data){
+        console.log('data', data);
+      });
+
+    }
+
+    </script>
+  </head>
+  <body>
+    <button onclick="getValue()">click me and watch the console</button>
+  </body>
+</html>
