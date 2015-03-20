@@ -3,10 +3,9 @@
   <head>
 
     <script>
-        function get(url) {
+    function get(url) {
       // Return a new promise.
       return new Promise(function(resolve, reject) {
-
         var req = new XMLHttpRequest();
         req.open('GET', url);
 
@@ -19,10 +18,10 @@
             reject(Error(req.statusText));
           }
         };
+
         req.onerror = function() {
           reject(Error("Network Error"));
         };
-
         // Make the request
         req.send();
       });
@@ -32,17 +31,16 @@
       var promise = get('/value');
       
       promise.then(function(response) {
-        //throw "Unexpected condition";
-          return 3 * +response;
+        return 3 * +response;
       })
       .then(function(data) {
         var result = 4 * data;
         console.log('I was passed ' + data + ' and will alert ' + result);
-         return result;
+        return result;
       })
       .then(function(data){
         var result = 'abc' + data;
-        console.log('reso', result);
+        console.log('result of abc + data', result);
         return result;
       })
       .catch(function(error) {
@@ -50,6 +48,7 @@
         alert('There was an error: ' + error);
       });
 
+      //This starts a new chain
       promise.then(function(data){
         console.log('data', data);
       });

@@ -8,6 +8,6 @@ illustrates the asynchronous nature of setTimeout
 http://localhost:4567/jq.html
 shows a use of jQuery deferred objects
 
-http://localhost:4567/
+http://localhost:4567/promise.html
 shows a use of the promise api
 
