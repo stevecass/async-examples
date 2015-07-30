@@ -1,14 +1,12 @@
 require 'sinatra'
 
-get '/' do
-  File.read('promise.html')
-end
-get '/timeout.html' do
-  File.read('timeout.html')
+get '/*.html' do |fname|
+  fname += '.html'
+  File.read(fname)
 end
 
-get '/jq.html' do
-  File.read('jq.html')
+get '/' do
+  File.read('promise.html')
 end
 
 get '/value' do
