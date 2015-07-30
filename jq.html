@@ -19,9 +19,11 @@
         }).then(function(data){
           console.log(data);
         });
+
         dfd.error(function(err){
           console.log('Oh')
         });
+        
         dfd.always(function(data){
           console.log("I'll always happen")
         });

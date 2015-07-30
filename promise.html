@@ -8,7 +8,6 @@
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('GET', url);
-
         req.onload = function() {
           if (req.status == 200) {
             // Resolve the promise with the response text
@@ -22,6 +21,7 @@
         req.onerror = function() {
           reject(Error("Network Error"));
         };
+
         // Make the request
         req.send();
       });
@@ -34,13 +34,24 @@
         return 3 * +response;
       })
       .then(function(data) {
-        var result = 4 * data;
-        console.log('I was passed ' + data + ' and will alert ' + result);
+        //try throwing an error here to see what happens
+        // throw 'An error occurred';
+        var result = 4 * Number(data);
+        console.log('Function was passed ' + data + ' and will log ' + result);
         return result;
       })
       .then(function(data){
-        var result = 'abc' + data;
-        console.log('result of abc + data', result);
+        console.log('Function will call server and return a promise');
+        // here we make a second server call and chain a then to use the value returned
+        return get('/value').then(function(val) { 
+          var result = data * val;
+          console.log('Server returned ' + val + ' so Function will return '  + result);
+          return result;
+        });
+      })
+      .then(function(data){
+        var result = 3 * Number(data);
+        console.log('Function was passed ' + data + ' and will return ' + result);
         return result;
       })
       .catch(function(error) {

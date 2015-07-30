@@ -1,7 +1,7 @@
 require 'sinatra'
 
 get '/' do
-  File.read('index.html')
+  File.read('promise.html')
 end
 get '/timeout.html' do
   File.read('timeout.html')
